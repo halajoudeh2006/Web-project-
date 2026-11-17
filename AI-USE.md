@@ -13,4 +13,4 @@ We used AI tools (ChatGPT and Gemini) to help us with a few parts of this projec
 ## 3. JavaScript Search and Sort
 * **What we used it for:** Fixing bugs in the JavaScript code for searching and sorting.
 * **The problem we had:** At first, the search bar and the sort dropdown didn't work together properly—when we sorted the movies, the search filter reset. AI helped us combine `filter()` and `sort()` correctly in our React component.
-*
+
