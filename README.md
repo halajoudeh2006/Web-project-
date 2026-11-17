@@ -1,16 +1,32 @@
-# React + Vite
+# Movies Catalog App (Milestone 1)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A React single-page application for browsing, searching, and sorting a collection of 30 movies. Created for the Web Applications Programming and Engineering course.
 
-Currently, two official plugins are available:
+## Team Members
+* Raneen Attieh Mohammed Omar - ID: 2431788
+* Hala Burhan Mohammad Joudeh - ID: 2431645
+* Raghad Ziad Abu-Shuaib - ID: 2433627
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- View a list of 30 movies with their category, rating, and release year.
+- Search movies by title and sort them simultaneously.
+- Navigation between Home (Movies), Login, Register, and About pages.
+- Responsive design that works on both desktop and mobile screens.
 
-## React Compiler
+## How to Run Locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/halajoudeh2006/Web-project.git
+   ```
 
-## Expanding the Oxlint configuration
+2. Go to the project directory and install dependencies:
+   ```bash
+   cd client
+   npm install
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
