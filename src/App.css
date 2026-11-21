@@ -88,3 +88,10 @@ button:hover {
   margin: 8px 0;
   font-size: 0.9rem;
 }
+* {
+  box-sizing: border-box;
+}
+
+input, select {
+  max-width: 100%;
+}
