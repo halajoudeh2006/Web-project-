@@ -89,27 +89,28 @@ button:hover {
   font-size: 0.9rem;
 }
 * {
-  box-sizing: border-box !important;
+  box-sizing: border-box;
 }
 
 html, body, #root {
-  max-width: 100% !important;
-  overflow-x: hidden !important;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 @media (max-width: 600px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 16px !important;
+  }
+
   div {
-    flex-wrap: wrap !important;
-    max-width: 100% !important;
+    flex-wrap: wrap;
+    max-width: 100%;
   }
 
   input, select {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100%;
+    max-width: 100%;
   }
-}
-
-input, select {
-  width: 100% !important;
-  max-width: 100% !important;
 }
