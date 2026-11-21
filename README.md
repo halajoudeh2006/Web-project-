@@ -22,7 +22,7 @@ A React single-page application for browsing, searching, and sorting a collectio
 
 2. Go to the project directory and install dependencies:
    ```bash
-   cd client
+   cd Web-project
    npm install
    ```
 
