@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { moviesData } from './moviesData';
+import './App.css';
+
 
 // 1. Shared Navigation Header
 function Navbar() {
