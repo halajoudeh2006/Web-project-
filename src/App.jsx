@@ -1,120 +1,147 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { moviesData } from './moviesData';
 import './App.css';
 
-
-// 1. Shared Navigation Header
+// Navigation
 function Navbar() {
   return (
-    <nav style={{ padding: '15px', background: '#333', color: '#fff', display: 'flex', gap: '20px' }}>
-      <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>Home (Movies)</Link>
-      <Link to="/login" style={{ color: '#fff', textDecoration: 'none' }}>Login</Link>
-      <Link to="/register" style={{ color: '#fff', textDecoration: 'none' }}>Register</Link>
-      <Link to="/about" style={{ color: '#fff', textDecoration: 'none' }}>About</Link>
+    <nav>
+      <Link to="/">Home (Movies)</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
+      <Link to="/about">About</Link>
     </nav>
   );
 }
 
-// 2. Main Page with Filter and Sort working together
+// Movie Card
+function MovieCard(props) {
+  return (
+    <div className="movie-card">
+      <h3>{props.movie.title}</h3>
+      <p>Category: {props.movie.category}</p>
+      <p>Rating: ⭐ {props.movie.rating}</p>
+      <p>Year: {props.movie.year}</p>
+    </div>
+  );
+}
+
+// Movie List
+function MovieList(props) {
+  return (
+    <div className="movies-grid">
+      {props.movies.map(movie => (
+        <MovieCard key={movie.id} movie={movie} />
+      ))}
+    </div>
+  );
+}
+
+// Home Page
 function MainPage() {
+  const [movies] = useState(moviesData);
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState('title');
 
-  // Filter and Sort implementation
-  const filteredMovies = moviesData
-    .filter(movie => movie.title.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => {
-      if (sortBy === 'rating') return b.rating - a.rating;
-      return a.title.localeCompare(b.title);
-    });
+  // Search
+  let filteredMovies = movies.filter(movie =>
+    movie.title.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Sort
+  if (sortBy === 'rating') {
+    filteredMovies.sort((a, b) => b.rating - a.rating);
+  } else {
+    filteredMovies.sort((a, b) =>
+      a.title.localeCompare(b.title)
+    );
+  }
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="page-container">
       <h2>Movies List (Total: {filteredMovies.length})</h2>
-      
-      {/* Search and Sort Controls */}
-      <div style={{ marginBottom: '20px', display: 'flex', gap: '15px' }}>
-        <input 
-          type="text" 
-          placeholder="Search movies..." 
+
+      <div className="movie-controls">
+        <input
+          type="text"
+          placeholder="Search movies..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ padding: '8px', width: '250px' }}
+          onChange={e => setSearch(e.target.value)}
         />
-        <select onChange={(e) => setSortBy(e.target.value)} style={{ padding: '8px' }}>
+
+        <select
+          value={sortBy}
+          onChange={e => setSortBy(e.target.value)}
+        >
           <option value="title">Sort by Title</option>
           <option value="rating">Sort by Highest Rating</option>
         </select>
       </div>
 
-      {/* Grid Display */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '15px' }}>
-        {filteredMovies.map(movie => (
-          <div key={movie.id} style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '8px' }}>
-            <h3>{movie.title}</h3>
-            <p>Category: {movie.category}</p>
-            <p>Rating: ⭐ {movie.rating}</p>
-            <p>Year: {movie.year}</p>
-          </div>
-        ))}
-      </div>
+      <MovieList movies={filteredMovies} />
     </div>
   );
 }
 
-// 3. Login Page Placeholder
+// Login Page
 function LoginPage() {
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="page-container">
       <h2>Login Page</h2>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div><input type="email" placeholder="Email" style={{ margin: '5px', padding: '8px' }} /></div>
-        <div><input type="password" placeholder="Password" style={{ margin: '5px', padding: '8px' }} /></div>
-        <button style={{ margin: '5px', padding: '8px 15px' }}>Login</button>
+
+      <form onSubmit={e => e.preventDefault()}>
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 }
 
-// 4. Register Page Placeholder
+// Register Page
 function RegisterPage() {
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="page-container">
       <h2>Registration Page</h2>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div><input type="text" placeholder="Full Name" style={{ margin: '5px', padding: '8px' }} /></div>
-        <div><input type="email" placeholder="Email" style={{ margin: '5px', padding: '8px' }} /></div>
-        <div><input type="password" placeholder="Password" style={{ margin: '5px', padding: '8px' }} /></div>
-        <button style={{ margin: '5px', padding: '8px 15px' }}>Register</button>
+
+      <form onSubmit={e => e.preventDefault()}>
+        <input type="text" placeholder="Full Name" />
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button type="submit">Register</button>
       </form>
     </div>
   );
 }
 
-// 5. About Page
+// About Page
 function AboutPage() {
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="page-container">
       <h2>About Application</h2>
-      <p>This application is a prototype React Single-Page Application designed to manage and display movie records, developed for the Web Applications Programming and Engineering course.</p>
+      <p>
+        This application is a React project designed
+        to display and manage movie records.
+      </p>
     </div>
   );
 }
 
-// Root App Component
-export default function App() {
+// Main App
+function App() {
   return (
-    <Router>
-      <div>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
+
+export default App;
